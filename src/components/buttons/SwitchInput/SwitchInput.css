@@ -1,0 +1,26 @@
+.base-page-container .form-wrapper .switch-input {
+  align-items: center;
+  display: flex;
+  left: 80px;
+  position: absolute;
+  top: 415px;
+}
+
+.base-page-container .form-wrapper .switch-input {
+  margin: 0 50px
+}
+
+.base-page-container .form-wrapper .switch-input .switch-label {
+  color: #252525;
+  font: 18px Arial, sans-serif;
+}
+
+@media screen and (max-width: 320px) {
+  .base-page-container .form-wrapper .switch-input  {
+    left: 10px;
+    width: 100%;
+    top: 330px;
+    margin: 0;
+  }
+
+}

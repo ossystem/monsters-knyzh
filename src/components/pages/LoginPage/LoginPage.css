@@ -1,0 +1,28 @@
+.base-page-container .form-wrapper .text-field {
+  left: 80px;
+  position: absolute;
+  width: 330px;
+}
+
+.base-page-container .form-wrapper .email {
+  top: 375px;
+}
+
+.base-page-container .form-wrapper .password {
+  top: 450px;
+}
+
+@media screen and (max-width: 320px) {
+  .base-page-container .form-wrapper .text-field {
+    left: 10px;
+    width: 280px;
+  }
+
+  .base-page-container .form-wrapper .email {
+    top: 275px;
+  }
+
+  .base-page-container .form-wrapper .password {
+    top: 350px;
+  }
+}

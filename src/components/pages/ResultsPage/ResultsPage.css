@@ -1,0 +1,190 @@
+.results-page-container {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+}
+
+.results-page-container .normal {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-bottom: 30px;
+  width: 100%;
+}
+
+.results-page-container .mob {
+  display: none;
+}
+
+.results-page-container .top-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 75px;
+  width: 100%;
+}
+
+.results-page-container .top-wrapper .top-logo-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 420px;
+}
+
+.results-page-container .top-wrapper .top-logo-wrapper .top-logo {
+  width: 100%;
+}
+
+.results-page-container .top-wrapper .top-logo-wrapper .top-logo-label {
+  color: #abd48b;
+  font: 24px Arial, sans-serif;
+  margin-top: 20px;
+  text-align: center;
+}
+
+.results-page-container .page-title {
+  color: rgba(0, 0, 0, 0.87);
+  font: 64px Arial, sans-serif;
+  margin-top: 60px;
+  white-space: pre-wrap;
+}
+
+.results-page-container .results-content {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 30px;
+  width: 100%;
+}
+
+.results-page-container .results-content .form-wrapper {
+  border: 1px solid #e3e3e3;
+  border-radius: 5px;
+  box-shadow: 0 15px 45px rgba(0,0,0,0.07);
+  display: flex;
+  justify-content: center;
+  height: 745px;
+  margin-left: 100px;
+  position: relative;
+  width: 285px;
+  z-index: 10;
+}
+
+.results-page-container .results-content .monster-img-wrapper {
+  align-items: flex-end;
+  display: flex;
+  flex: 1;
+  justify-content: center;
+}
+
+.results-page-container .results-content .monster-img-wrapper .monster-img {
+  margin-bottom: 30px;
+  max-width: 530px;
+}
+
+.results-page-container .results-content .form-wrapper .paginator {
+  align-items: center;
+  background-color: #8cbe82;
+  border-radius: 5px;
+  box-shadow: 0 15px 45px rgba(0,0,0,0.2);
+  color: #ffffff;
+  display: flex;
+  font: bold 36px Arial, sans-serif;
+  justify-content: center;
+  height: 80px;
+  left: -50px;
+  position: absolute;
+  width: 170px;
+  top: 55px;
+  z-index: 20;
+}
+
+.results-page-container .form-wrapper .answers-points {
+  position: absolute;
+  top: 160px;
+}
+
+.results-page-container .form-wrapper .answers-points .answer-point {
+  align-items: center;
+  border: 2px solid #d8e04e;
+  border-radius: 50%;
+  color: #6e6e6e;
+  display: flex;
+  font: 18px Arial, sans-serif;
+  justify-content: center;
+  height: 120px;
+  margin-bottom: 10px;
+  text-align: center;
+  width: 120px;
+}
+
+@media screen and (max-width: 320px) {
+  .results-page-container .normal {
+    display: none;
+  }
+
+  .results-page-container .mob {
+    display: block;
+  }
+
+  .results-page-container .top-wrapper {
+    flex-direction: column;
+    margin-top: 0;
+  }
+
+  .results-page-container .top-wrapper .top-logo-wrapper {
+    width: 100%;
+  }
+
+  .results-page-container .top-wrapper .top-logo-wrapper .top-logo {
+    height: initial;
+    margin: 40px 50px 15px;
+    width: 220px;
+  }
+
+  .results-page-container .top-wrapper .top-logo-wrapper .top-logo-label {
+    color: #abd48b;
+    font: 22px Arial, sans-serif;
+    margin: 0;
+    text-align: center;
+  }
+
+  .results-page-container .page-title {
+    font: 30px Arial, sans-serif;
+    margin: 40px 0 85px;
+    text-align: center;
+  }
+
+  .results-page-container .results-content {
+    flex-direction: column;
+  }
+
+  .results-page-container .results-content .monster-img-wrapper .monster-img {
+    margin-bottom: 45px;
+    max-width: 220px;
+  }
+
+  .results-page-container .results-content .form-wrapper {
+    height: 475px;
+    margin: 0 10px;
+    width: 300px;
+  }
+
+  .results-page-container .results-content .form-wrapper .paginator {
+    left: -10px;
+    top: 30px;
+  }
+
+  .results-page-container .form-wrapper .answers-points {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 0 22px;
+    width: calc(100% - 40px);
+  }
+
+  .results-page-container .form-wrapper .answers-points .answer-point {
+    margin-bottom: 20px;
+  }
+}

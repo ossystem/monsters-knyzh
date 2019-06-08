@@ -1,0 +1,17 @@
+.base-page-container .form-wrapper .radio-button {
+  left: 80px;
+  position: absolute;
+  top: 340px;
+}
+
+.base-page-container .form-wrapper .radio-button .radio-label span {
+  font: 18px Arial, sans-serif;
+}
+
+@media screen and (max-width: 320px) {
+  .base-page-container .form-wrapper .radio-button  {
+    left: 10px;
+    width: 300px;
+    top: 280px;
+  }
+}
