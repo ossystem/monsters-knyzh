@@ -3,14 +3,15 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import ButtonNext from '../../buttons/ButtonNext/ButtonNext';
+import IconButton from '@material-ui/core/IconButton';
+import CloseIcon from '@material-ui/icons/Close';
 import './BasePage.css';
+import constatns from '../../../constants';
 
 class BasePage extends Component {
   constructor (props) {
     super(props);
-
   }
-
 
   render () {
     const {
@@ -19,7 +20,9 @@ class BasePage extends Component {
       titleText,
       questionInput,
       buttonOptions,
-      monsterImg
+      monsterImg,
+      showNotification,
+      handleCloseNotificationButton
     } = this.props;
 
     return (
@@ -36,6 +39,10 @@ class BasePage extends Component {
           <div className="monster-img-wrapper">
             <img className="monster-img" src={monsterImg} alt=""/>
           </div>
+          <div className="notification" style={{display: showNotification? 'flex' : 'none' }}>{constatns.notSelected}
+            <IconButton aria-label="Delete" size='large'  onClick={handleCloseNotificationButton} >
+              <CloseIcon style={{ fontSize: 20 }} className='closeButton'/>
+            </IconButton> </div>
           <div className="paginator">{currentPage} from {totalPages}</div>
           <div className="page-title">{titleText}</div>
           {questionInput}

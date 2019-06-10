@@ -81,6 +81,26 @@
   z-index: 20;
 }
 
+.base-page-container .form-wrapper .notification {
+  align-items: center;
+  background-color: #e6aa00;
+  border-radius: 5px;
+  box-shadow: 0 15px 45px rgba(0,0,0,0.2);
+  color: #ffffff;
+  display: flex;
+  font: 18px Arial, sans-serif;
+  justify-content: space-around;
+  height: 48px;
+  position: absolute;
+  width: 600px;
+  top: -24px;
+  z-index: 20;
+}
+
+.base-page-container .form-wrapper .closeButton {
+     color: white;
+}
+
 .base-page-container .form-wrapper .page-title {
   font: 64px Arial, sans-serif;
   left: 80px;

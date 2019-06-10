@@ -22,7 +22,6 @@
 
 .main-button.disabled {
   background-color: #e5e5e5;
-  pointer-events: none;
 }
 
 .main-button.green-btn {

@@ -33,7 +33,7 @@ const SwitchInput = props => {
   return (
       <div className="switch-input">
         <FormLabel className="switch-label">
-          {questions[0]}
+          {questions[1]}
         </FormLabel>
         <Switch
             className="switch"
@@ -46,7 +46,7 @@ const SwitchInput = props => {
             }}
         />
         <FormLabel className="switch-label">
-          {questions[1]}
+          {questions[0]}
         </FormLabel>
       </div>
 

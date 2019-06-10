@@ -31,8 +31,9 @@ export default {
             1: {
                 title: 'Are you a monster day or a night monster',
                 questions: [
-                    'Day monster',
-                    'Night monster'
+                    'Night monster',
+                    'Day monster'
+
                 ],
                 img: '/img/page_7_monster.png',
                 inputType : 'SwitchInput'

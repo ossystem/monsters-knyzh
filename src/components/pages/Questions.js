@@ -17,6 +17,8 @@ class Questions extends Component {
 
     const {questions, title, img, inputType} = constants.possibleAnswers[step][questionNumber];
 
+    let initialValue = this.getInitialValue(inputType, questions);
+
     this.state = {
       questions,
       title,
@@ -24,17 +26,34 @@ class Questions extends Component {
       inputType,
       step: step,
       questionNumber: questionNumber,
-      selectedValues: questions[0],
+      selectedValues: initialValue,
       selectedValuesArray: [],
       selectedValueSwitch: true,
       selectedValueSlider: 50,
+      showNotification: false
     };
 
     this.handleChangeRadioButton = this.handleChangeRadioButton.bind(this);
     this.handleChangeCheckboxInput = this.handleChangeCheckboxInput.bind(this);
     this.handleChangeSwitchInput = this.handleChangeSwitchInput.bind(this);
     this.handleChangeSliderInput = this.handleChangeSliderInput.bind(this);
+    this.handleCloseNotificationButton = this.handleCloseNotificationButton.bind(this);
     this._nextPage = this.nextPage.bind(this);
+  }
+  
+  getInitialValue(inputType, questions){
+    switch (inputType) {
+      case 'CheckboxInput':
+        return '';
+      default:
+        return questions[0];
+    }
+    
+  }
+  handleCloseNotificationButton (e) {
+    this.setState({
+      showNotification: false
+    });
   }
 
   handleChangeRadioButton (e) {
@@ -58,7 +77,8 @@ class Questions extends Component {
 
       this.setState({
         selectedValuesArray: selectedValuesArray,
-        selectedValues: selectedValuesArray.join(', ')
+        selectedValues: selectedValuesArray.join(', '),
+        showNotification: false
       });
     };
   }
@@ -81,6 +101,13 @@ class Questions extends Component {
 
 
   nextPage () {
+    if(!this.state.selectedValues.length){
+      this.setState({
+        showNotification: true
+      });
+      return;
+    }
+
     const answers = this.props.answers;
 
     answers[this.state.step][this.state.questionNumber] =
@@ -96,32 +123,31 @@ class Questions extends Component {
     let nextStep = this.state.step + 1;
     if (constants.possibleAnswers[this.state.step] && constants.possibleAnswers[this.state.step][nextQuestion]){
       const {questions, title, img, inputType} = constants.possibleAnswers[this.state.step][nextQuestion];
+      let initialValue = this.getInitialValue(inputType, questions);
           this.setState({
             questions,
             title,
             img,
             inputType,
             questionNumber: nextQuestion,
-            selectedValues: '',
-            selectedValuesArray: [],
-            selectedValueSwitch: true,
-            selectedValueSlider: 50,
+            selectedValues: initialValue
         });
     } else if( constants.possibleAnswers[nextStep] && constants.possibleAnswers[nextStep][1]){
       const {questions, title, img, inputType} = constants.possibleAnswers[nextStep][1];
+      let initialValue = this.getInitialValue(inputType, questions);
           this.setState({
             questions,
             title,
             img,
             inputType,
             step: nextStep,
-            selectedValues: '',
-            selectedValuesArray: [],
-            selectedValueSwitch: true,
-            selectedValueSlider: 50,
+            selectedValues: initialValue
           });
     } else {
-
+      this.props.dispatch({
+        type: 'SET_TOKEN',
+        token: null
+      });
       this.props.history.push('/results');
     }
 
@@ -181,6 +207,8 @@ class Questions extends Component {
           totalPages={4}
           questionInput={questionInput}
           monsterImg={this.state.img}
+          showNotification={this.state.showNotification}
+          handleCloseNotificationButton= {this.handleCloseNotificationButton}
           buttonOptions={{
             className: 'on-form',
             text: 'Next',

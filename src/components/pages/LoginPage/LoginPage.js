@@ -34,7 +34,7 @@ class LoginPage extends Component {
     const {email, password} = this.state;
 
     let responseData = (email && password ) ?{success: '200', token: constants.token} : {};
-    const {success, token: token} = responseData || {};
+    const {success, token} = responseData || {};
 
     if (!success || !token) {
       this.setState({
