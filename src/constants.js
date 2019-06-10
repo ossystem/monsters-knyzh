@@ -41,7 +41,7 @@ export default {
         },
         4: {
             1: {
-                title: "You'd rather be a bad or&#10;a good monster",
+                title: "You'd rather be a bad or a good monster",
                 questions: [
                     'Bad monster',
                     'Good monster'

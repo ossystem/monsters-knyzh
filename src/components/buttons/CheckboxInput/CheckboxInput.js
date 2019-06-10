@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import './CheckboxInput.css';
 import Checkbox from '@material-ui/core/Checkbox';
@@ -15,6 +15,8 @@ const styles = {
   checked: {}
 };
 
+
+
 const CheckboxInput = props => {
   const {
     _handleChange,
@@ -22,6 +24,33 @@ const CheckboxInput = props => {
     classes
   } = props.options || props;
 
+  const [selectedValuesArray, setSelectedValuesArray] = useState([]);
+
+
+  const  handleChangeCheckboxInput = function(el){
+    console.log(selectedValuesArray);
+
+
+    return e => {
+      let array = selectedValuesArray.slice();
+      if (e.target.checked) {
+        console.log('element', el);
+        array.push(el);
+      } else {
+        console.log('element', el);
+        const index = array.findIndex(i => i === el);
+        if (index >= 0) {
+          array.splice(index, 1);
+        }
+      }
+      setSelectedValuesArray(array);
+      _handleChange(array.join(', '));
+
+    };
+
+
+
+  };
 
   return (
       <FormGroup className="checkbox">
@@ -33,7 +62,7 @@ const CheckboxInput = props => {
                   className="checkbox-label"
                   control={
                     <Checkbox
-                        onChange={_handleChange(el)}
+                        onChange={handleChangeCheckboxInput(el)}
                         classes={{
                           root: classes.root,
                           checked: classes.checked,

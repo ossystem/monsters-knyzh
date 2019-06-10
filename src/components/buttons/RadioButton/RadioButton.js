@@ -1,7 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import { ArrowForward } from '@material-ui/icons';
 import './RadioButton.css';
 import Radio from '@material-ui/core/Radio';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -26,11 +24,18 @@ const RadioButton = props => {
     classes
   } = props.options || props;
 
+
+
+  const  handleChangeRadioButton = function(e){
+    _handleChange(e.target.value)
+  };
+
+
   return (
       <RadioGroup
           className="radio-button"
           value={selectedValues}
-          onChange={_handleChange}
+          onChange={handleChangeRadioButton}
       >
         {questions.map((el, index) => {
           return (

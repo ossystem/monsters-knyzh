@@ -115,7 +115,7 @@
   right: 30px;
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 480px) {
   .base-page-container {
     margin: 0 auto 40px;
     width: 310px;
@@ -161,7 +161,7 @@
   }
 
   .base-page-container .form-wrapper .paginator {
-    left: 0;
+    left: -5px;
   }
   .base-page-container .form-wrapper .notification {
     width: 300px;

@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import App from './app/App';
-import constants from './constants';
 
 const initialState = {
     token: localStorage.getItem('token'),

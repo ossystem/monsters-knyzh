@@ -15,7 +15,7 @@
   font: 18px Arial, sans-serif;
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 480px) {
   .base-page-container .form-wrapper .switch-input  {
     left: 10px;
     width: 100%;

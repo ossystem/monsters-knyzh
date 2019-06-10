@@ -27,16 +27,10 @@ class Questions extends Component {
       step: step,
       questionNumber: questionNumber,
       selectedValues: initialValue,
-      selectedValuesArray: [],
-      selectedValueSwitch: true,
-      selectedValueSlider: 50,
       showNotification: false
     };
 
-    this.handleChangeRadioButton = this.handleChangeRadioButton.bind(this);
-    this.handleChangeCheckboxInput = this.handleChangeCheckboxInput.bind(this);
-    this.handleChangeSwitchInput = this.handleChangeSwitchInput.bind(this);
-    this.handleChangeSliderInput = this.handleChangeSliderInput.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
     this.handleCloseNotificationButton = this.handleCloseNotificationButton.bind(this);
     this._nextPage = this.nextPage.bind(this);
   }
@@ -56,49 +50,18 @@ class Questions extends Component {
     });
   }
 
-  handleChangeRadioButton (e) {
-    this.setState({
-      selectedValues: e.target.value
-    });
-  }
-  handleChangeCheckboxInput (value) {
-    return e => {
-      const selectedValuesArray = [...this.state.selectedValuesArray];
-
-      if (e.target.checked) {
-        selectedValuesArray.push(value);
-      } else {
-        const index = selectedValuesArray.findIndex(i => i === value);
-
-        if (index >= 0) {
-          selectedValuesArray.splice(index, 1);
-        }
-      }
-
+  handleInputChange(value) {
+    if (value){
       this.setState({
-        selectedValuesArray: selectedValuesArray,
-        selectedValues: selectedValuesArray.join(', '),
+        selectedValues: value,
         showNotification: false
       });
-    };
+    } else  {
+      this.setState({
+        selectedValues: value
+      });
+    }
   }
-
-  handleChangeSwitchInput () {
-    this.setState({
-      selectedValueSwitch: !this.state.selectedValueSwitch,
-      selectedValues: this.state.questions[+!this.state.selectedValueSwitch]
-    });
-  }
-
-  handleChangeSliderInput (e, selectedValueSlider) {
-    let selectedValues = (this.state.selectedValueSlider >= 50) ? this.state.questions[0] : this.state.questions[1];
-    this.setState({
-      selectedValueSlider,
-      selectedValues :  selectedValues
-
-    });
-  }
-
 
   nextPage () {
     if(!this.state.selectedValues.length){
@@ -155,50 +118,30 @@ class Questions extends Component {
   }
 
 
-
   render () {
 
     const { classes } = this.props;
 
     const ButtonType =  this.state.inputType || 'RadioButton';
 
-    const  components = {
-      RadioButton: (
-          <RadioButton
+    const components =  {
+      'RadioButton' : RadioButton,
+      'CheckboxInput' : CheckboxInput,
+      'SwitchInput': SwitchInput,
+      'SliderInput':  SliderInput
+    };
+
+    const ButtonElement = components[ButtonType];
+
+    const  questionInput =  (
+          <ButtonElement
               selectedValues = {this.state.selectedValues}
               questions = {this.state.questions}
               classes = {classes}
-              _handleChange={this.handleChangeRadioButton}
+              _handleChange={this.handleInputChange}
           />
-      ),
-      CheckboxInput: (
-          <CheckboxInput
-              selectedValues = {this.state.selectedValueIndex}
-              questions = {this.state.questions}
-              classes = {classes}
-              _handleChange={this.handleChangeCheckboxInput}
-          />
-      ),
-      SwitchInput: (
-          <SwitchInput
-              selectedValues = {this.state.selectedValueSwitch}
-              questions = {this.state.questions}
-              classes = {classes}
-              _handleChange={this.handleChangeSwitchInput}
-          />
-      ),
-      SliderInput: (
-          <SliderInput
-              selectedValues = {this.state.selectedValueSlider}
-              questions = {this.state.questions}
-              classes = {classes}
-              _handleChange={this.handleChangeSliderInput}
-          />
-      )
-    };
+      );
 
-
-    const questionInput = components[ButtonType];
 
     // if last question
     let ifLastStep = this.state.step ===  Object.keys(constants.possibleAnswers).length + 1;

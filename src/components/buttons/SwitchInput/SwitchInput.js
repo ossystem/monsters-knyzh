@@ -1,7 +1,5 @@
-import React from 'react';
+import React, {useState} from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import { ArrowForward } from '@material-ui/icons';
 import './SwitchInput.css';
 import FormLabel from '@material-ui/core/FormLabel';
 import Switch from '@material-ui/core/Switch';
@@ -29,6 +27,14 @@ const SwitchInput = props => {
     classes
   } = props.options || props;
 
+    const [selectedValueSwitch, setselectedValueSwitch] = useState(true);
+
+    const  handleChangeSwitchInput = function(e){
+        let newValue = !selectedValueSwitch;
+        setselectedValueSwitch(newValue);
+        console.log(questions[+newValue]);
+        _handleChange(questions[+!newValue]);
+    };
 
   return (
       <div className="switch-input">
@@ -37,8 +43,8 @@ const SwitchInput = props => {
         </FormLabel>
         <Switch
             className="switch"
-            checked={selectedValues}
-            onChange={_handleChange}
+            checked={selectedValueSwitch}
+            onChange={handleChangeSwitchInput}
             classes={{
               switchBase: classes.colorSwitchBase,
               checked: classes.colorChecked,
@@ -55,7 +61,7 @@ const SwitchInput = props => {
 };
 
 SwitchInput.propTypes = {
-    selectedValues: PropTypes.bool,
+    selectedValues: PropTypes.any,
   questions: PropTypes.array,
   _handleChange: PropTypes.func,
   classes: PropTypes.object

@@ -65,7 +65,7 @@
   display: none;
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 480px) {
   .main-button {
     display: inline-block;
     height: 70px;
