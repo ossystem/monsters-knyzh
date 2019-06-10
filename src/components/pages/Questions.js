@@ -141,6 +141,7 @@ class Questions extends Component {
             img,
             inputType,
             step: nextStep,
+            questionNumber: 1,
             selectedValues: initialValue
           });
     } else {
@@ -199,6 +200,11 @@ class Questions extends Component {
 
     const questionInput = components[ButtonType];
 
+    // if last question
+    let ifLastStep = this.state.step ===  Object.keys(constants.possibleAnswers).length + 1;
+    let ifLastQuestion = Object.keys(constants.possibleAnswers[this.state.step]).length;
+    let ifSubmitButton = ifLastStep && ifLastQuestion;
+
     return (
       <div>
         <BasePage
@@ -210,15 +216,15 @@ class Questions extends Component {
           showNotification={this.state.showNotification}
           handleCloseNotificationButton= {this.handleCloseNotificationButton}
           buttonOptions={{
-            className: 'on-form',
-            text: 'Next',
+            className: 'on-form ' + (ifSubmitButton && 'green-btn') ,
+            text:  ifSubmitButton ? 'Submit' :  'Next',
             onClick: this._nextPage,
             isDisabled: !this.state.selectedValues.length
           }}
         />
         <ButtonNext
-          className='mob'
-          text='Next'
+          className={'mob ' + + (ifSubmitButton && 'green-btn')}
+          text={ifSubmitButton ? 'Submit' :  'Next'}
           onClick={this._nextPage}
           isDisabled={!this.state.selectedValues.length}
         />

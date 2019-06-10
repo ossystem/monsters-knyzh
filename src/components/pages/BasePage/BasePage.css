@@ -163,6 +163,10 @@
   .base-page-container .form-wrapper .paginator {
     left: 0;
   }
+  .base-page-container .form-wrapper .notification {
+    width: 300px;
+    padding: 5px;
+  }
 
   .base-page-container .form-wrapper .page-title {
     font: 30px Arial, sans-serif;
