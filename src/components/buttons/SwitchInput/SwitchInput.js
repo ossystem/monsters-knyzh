@@ -32,7 +32,6 @@ const SwitchInput = props => {
     const  handleChangeSwitchInput = function(e){
         let newValue = !selectedValueSwitch;
         setselectedValueSwitch(newValue);
-        console.log(questions[+newValue]);
         _handleChange(questions[+!newValue]);
     };
 

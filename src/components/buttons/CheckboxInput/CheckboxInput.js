@@ -28,16 +28,11 @@ const CheckboxInput = props => {
 
 
   const  handleChangeCheckboxInput = function(el){
-    console.log(selectedValuesArray);
-
-
     return e => {
       let array = selectedValuesArray.slice();
       if (e.target.checked) {
-        console.log('element', el);
         array.push(el);
       } else {
-        console.log('element', el);
         const index = array.findIndex(i => i === el);
         if (index >= 0) {
           array.splice(index, 1);
