@@ -12,6 +12,11 @@
   top: 450px;
 }
 
+.base-page-container .form-wrapper .formErrors {
+  top: 500px;
+  color: red;
+}
+
 @media screen and (max-width: 480px) {
   .base-page-container .form-wrapper .text-field {
     left: 10px;

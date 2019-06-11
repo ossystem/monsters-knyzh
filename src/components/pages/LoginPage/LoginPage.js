@@ -6,6 +6,7 @@ import BasePage from '../BasePage/BasePage';
 import ButtonNext from '../../buttons/ButtonNext/ButtonNext';
 import constants from '../../../constants';
 import './LoginPage.css';
+import {FormErrors} from "./FormErrors";
 
 const styles = {
   cssUnderline: {
@@ -20,10 +21,13 @@ class LoginPage extends Component {
     super(props);
 
     this.state = {
-      email: '',
-      password: '',
-      formIsFilled: false,
-      formHasErrors: false
+        email: '',
+        password: '',
+        formIsFilled: false,
+        formErrors: {email: '', password: ''},
+        emailValid: true,
+        passwordValid: true,
+        formValid: false
     };
 
     this._sendAuthRequest = this.sendAuthRequest.bind(this);
@@ -31,14 +35,19 @@ class LoginPage extends Component {
   }
 
   async sendAuthRequest () {
-    const {email, password} = this.state;
+
+    const {email, password, formValid} = this.state;
+
+    if(!formValid){
+        return;
+    }
 
     let responseData = (email && password ) ?{success: '200', token: constants.token} : {};
     const {success, token} = responseData || {};
 
     if (!success || !token) {
       this.setState({
-        formHasErrors: true
+          formValid: false
       });
 
       return;
@@ -55,15 +64,39 @@ class LoginPage extends Component {
   }
 
   onFieldChangeValue (e) {
-    this.setState({
-      [e.target.name]: e.target.value,
-      formHasErrors: false
-    }, () => {
-      this.setState({
-        formIsFilled: !!(this.state.email && this.state.password)
-      });
-    });
+      const name = e.target.name;
+      const value = e.target.value;
+      this.setState({[name]: value},
+          () => { this.validateField(name, value) });
   }
+
+    validateField(fieldName, value) {
+        let fieldValidationErrors = this.state.formErrors;
+        let emailValid = this.state.emailValid;
+        let passwordValid = this.state.passwordValid;
+
+        switch(fieldName) {
+            case 'email':
+                emailValid = value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i);
+                fieldValidationErrors.email = emailValid ? '' : ' is invalid';
+                break;
+            case 'password':
+                passwordValid = value.length >= 6;
+                fieldValidationErrors.password = passwordValid ? '': ' is too short';
+                break;
+            default:
+                break;
+        }
+        this.setState({formErrors: fieldValidationErrors,
+            emailValid: emailValid,
+            passwordValid: passwordValid
+        }, this.validateForm);
+    }
+
+    validateForm() {
+        this.setState({formValid: this.state.emailValid && this.state.passwordValid});
+    }
+
 
   render () {
     const  { classes } = this.props;
@@ -74,7 +107,7 @@ class LoginPage extends Component {
           placeholder="Your Email"
           type="text"
           name="email"
-          error={this.state.formHasErrors}
+          error={!this.state.emailValid}
           className="text-field email"
           onChange={this._onFieldChangeValue}
           classes={{
@@ -86,13 +119,14 @@ class LoginPage extends Component {
           placeholder="Your password"
           type="password"
           name="password"
-          error={this.state.formHasErrors}
+          error={!this.state.passwordValid}
           className="text-field password"
           onChange={this._onFieldChangeValue}
           classes={{
             underline: classes.cssUnderline,
           }}
         />
+          <FormErrors formErrors={this.state.formErrors} />
       </div>
     );
 
@@ -108,14 +142,14 @@ class LoginPage extends Component {
             className: 'on-form',
             text: 'Next',
             onClick: this._sendAuthRequest,
-            isDisabled: !this.state.formIsFilled
+            isDisabled: !this.state.formValid
           }}
         />
         <ButtonNext
           className='mob'
           text='Next'
           onClick={this._sendAuthRequest}
-          isDisabled={!this.state.formIsFilled}
+          isDisabled={!this.state.formValid}
         />
       </div>
     );
