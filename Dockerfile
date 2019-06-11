@@ -8,9 +8,11 @@ ENV NODE_PATH=/usr/local/lib/node_modules
 COPY package.json package.json
 
 RUN npm i && \
-    npm i -g webpack
+    npm i -g webpack && \
+    npm install -g serve
+
 
 COPY . .
 
 
-CMD ["npm", "run", "start"]
+CMD ["serve", "-s", "build", "-l", "3000"]
